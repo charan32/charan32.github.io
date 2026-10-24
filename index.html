@@ -344,6 +344,10 @@ footer { margin-top: 36px; font-family: var(--font-mono); font-size: 12px; color
         <button class="chip" type="button" data-g="data" data-k="delta" aria-pressed="false">Delta Lake</button>
         <button class="chip" type="button" data-g="data" data-k="eventhubs" aria-pressed="false">Event Hubs</button>
         <button class="chip" type="button" data-g="data" data-k="adf" aria-pressed="false">Azure Data Factory</button>
+        <button class="chip" type="button" data-g="data" data-k="kafka" aria-pressed="false">Kafka</button>
+        <button class="chip" type="button" data-g="data" data-k="airflow" aria-pressed="false">Airflow</button>
+        <button class="chip" type="button" data-g="data" data-k="dbt" aria-pressed="false">dbt</button>
+        <button class="chip" type="button" data-g="data" data-k="iceberg" aria-pressed="false">Apache Iceberg</button>
         <button class="chip" type="button" data-g="data" data-k="quality" aria-pressed="false">Data quality</button>
         <button class="chip" type="button" data-g="data" data-k="tuning" aria-pressed="false">Performance tuning</button>
         <button class="chip" type="button" data-g="ai" data-k="rag" aria-pressed="false">RAG and embeddings</button>
@@ -351,7 +355,7 @@ footer { margin-top: 36px; font-family: var(--font-mono); font-size: 12px; color
         <button class="chip" type="button" data-g="ai" data-k="nlp" aria-pressed="false">spaCy and Presidio</button>
         <button class="chip" type="button" data-g="ai" data-k="llm" aria-pressed="false">LLMs</button>
       </div>
-      <p class="also"><b>Also worked with</b><span>Airflow</span><span>Kafka</span><span>dbt</span><span>Data modeling</span></p>
+      <p class="also"><b>Also worked with</b><span>Data modeling</span></p>
       <p class="status" id="status" aria-live="polite"></p>
 
       <details class="proj" open data-skills="pyspark databricks spark delta eventhubs">
@@ -389,7 +393,7 @@ footer { margin-top: 36px; font-family: var(--font-mono); font-size: 12px; color
         </div>
       </details>
 
-      <details class="proj" data-skills="pyspark spark databricks delta eventhubs adf">
+      <details class="proj" data-skills="pyspark spark databricks delta eventhubs adf kafka airflow">
         <summary>
           <span class="tag prod">Production</span>
           <h3>Network telemetry pipelines</h3>
@@ -453,6 +457,43 @@ footer { margin-top: 36px; font-family: var(--font-mono); font-size: 12px; color
             <li>Spark performance tuning for large batch workloads.</li>
             <li>Reusable Azure Data Factory pipelines that speed up onboarding.</li>
           </ul>
+        </div>
+      </details>
+
+      <details class="proj" data-skills="python sql agents llm">
+        <summary>
+          <span class="tag plat">Open source</span>
+          <h3>Lakehouse Copilot: an AI analyst over MCP</h3>
+          <span class="chev" aria-hidden="true"></span>
+          <p class="one">An agent that answers data questions through a guarded, read-only MCP server, scored by a 31-question eval suite.</p>
+        </summary>
+        <div class="body">
+          <ul>
+            <li>MCP server with 7 read-only tools over the lakehouse: catalog, governed metrics, guarded SQL, pipeline health and contract violations.</li>
+            <li>Three layers of safety: a sqlglot parser that allows one read-only SELECT, a read-only DuckDB connection with file and network access off, and row and time limits.</li>
+            <li>A semantic layer of business metrics, so "revenue" has one definition in every answer.</li>
+            <li>Evaluation suite across metrics, analysis, data quality, safety and unanswerable questions, with expected answers computed from the data at run time.</li>
+            <li>Runs on a free local model through Ollama, or on OpenAI or Claude.</li>
+          </ul>
+          <p class="meta"><span>Code <b><a href="https://github.com/charan32/lakehouse-copilot">github.com/charan32/lakehouse-copilot</a></b></span></p>
+        </div>
+      </details>
+
+      <details class="proj" data-skills="python sql delta quality kafka airflow dbt iceberg">
+        <summary>
+          <span class="tag plat">Open source</span>
+          <h3>Streaming lakehouse with data contracts</h3>
+          <span class="chev" aria-hidden="true"></span>
+          <p class="one">Kafka to Apache Iceberg to dbt to Airflow, with bad, duplicate and late events handled on purpose.</p>
+        </summary>
+        <div class="body">
+          <ul>
+            <li>Kafka consumer writes micro-batches to Iceberg and commits offsets only after the write succeeds (at-least-once), with duplicates removed by event ID in dbt.</li>
+            <li>A versioned JSON Schema contract per event type. Rejected events go to a dead-letter topic and an Iceberg table with a readable reason.</li>
+            <li>dbt bronze, silver and gold layers with a star schema and 26 data tests. Airflow runs the build and fails it when too many events break their contracts.</li>
+            <li>CI starts the full Docker stack and checks data flows end to end.</li>
+          </ul>
+          <p class="meta"><span>Code <b><a href="https://github.com/charan32/streaming-lakehouse">github.com/charan32/streaming-lakehouse</a></b></span></p>
         </div>
       </details>
 
